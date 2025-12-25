@@ -8,6 +8,8 @@ services:
     environment:
       - NODE_ENV=production
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
+      - WORKFLOW_WORLD_TARGET=@workflow-worlds/redis
+      - WORKFLOW_DEBUG=1
     depends_on:
       - redis
     restart: unless-stopped
