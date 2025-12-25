@@ -26,6 +26,9 @@ FROM node:24-slim AS production
 
 WORKDIR /app
 
+# Copy source files
+COPY . .
+
 # Copy the built output from builder stage
 COPY --from=builder /app/.output ./
 
