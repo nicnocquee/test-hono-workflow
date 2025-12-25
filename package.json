@@ -1,0 +1,22 @@
+{
+  "name": "my-workflow-app",
+  "type": "module",
+  "scripts": {
+    "dev": "nitro dev",
+    "build": "nitro build",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "@workflow-worlds/redis": "^0.1.0",
+    "hono": "^4.11.2",
+    "nitro": "^3.0.1-alpha.1",
+    "rollup": "^4.54.0",
+    "workflow": "^4.0.1-beta.36"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  }
+}
