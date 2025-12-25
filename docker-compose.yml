@@ -8,7 +8,6 @@ services:
     environment:
       - NODE_ENV=production
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
-      - WORKFLOW_TARGET_WORLD=${WORKFLOW_TARGET_WORLD:-@workflow-worlds/redis}
       - WORKFLOW_DEBUG=${WORKFLOW_DEBUG:-1}
     depends_on:
       - redis
