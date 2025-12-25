@@ -11,6 +11,10 @@ export default defineNitroPlugin(async () => {
     redisUrl: REDIS_URL,
   });
 
-  await world.start?.();
-  console.log("Redis World started");
+  try {
+    await world.start?.();
+    console.log("Redis World started");
+  } catch (error) {
+    console.error("Error starting Redis World", error);
+  }
 });
