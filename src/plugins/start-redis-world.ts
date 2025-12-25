@@ -6,7 +6,6 @@ export default defineNitroPlugin(async () => {
 
   const { createWorld } = await import("@workflow-worlds/redis");
 
-  console.log(`Gonna call createWorld with ${REDIS_URL}`);
   const world = createWorld({
     redisUrl: REDIS_URL,
   });
