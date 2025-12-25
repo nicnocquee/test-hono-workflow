@@ -21,7 +21,7 @@ ENV REDIS_URL=${REDIS_URL}
 # Build the application
 RUN npm run build
 
-COPY ./node_modules/.nitro .output/server/node_modules/.nitro
+RUN cp -r ./node_modules/.nitro .output/server/node_modules/.nitro
 
 # Stage 2: Production stage
 FROM node:24-slim AS production
