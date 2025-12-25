@@ -1,5 +1,15 @@
 import { defineNitroPlugin } from "nitro/~internal/runtime/plugin";
 
+// Pre-load the ESM module to make it available
+// This helps when @workflow/core tries to require() it
+let redisModule: any = null;
+const loadRedisModule = (async () => {
+  if (!redisModule) {
+    redisModule = await import("@workflow-worlds/redis");
+  }
+  return redisModule;
+})();
+
 // Singleton to ensure we only create one world instance
 let worldInstance: any = null;
 let worldStartPromise: Promise<void> | null = null;
@@ -24,7 +34,9 @@ async function ensureWorldStarted() {
       console.log("Initializing Redis World...");
       const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
-      const { createWorld } = await import("@workflow-worlds/redis");
+      // Use pre-loaded module if available, otherwise import
+      const module = await loadRedisModule;
+      const { createWorld } = module;
 
       worldInstance = createWorld({
         redisUrl: REDIS_URL,
