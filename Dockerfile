@@ -40,13 +40,11 @@ RUN npm ci --omit=dev --ignore-scripts || true
 # Expose the port (adjust if your app uses a different port)
 EXPOSE 3000
 
-ARG WORKFLOW_TARGET_WORLD
 ARG WORKFLOW_DEBUG
 ARG REDIS_URL
 
 # Set environment to production
 ENV NODE_ENV=production
-ENV WORKFLOW_TARGET_WORLD=${WORKFLOW_TARGET_WORLD}
 ENV WORKFLOW_DEBUG=${WORKFLOW_DEBUG}
 ENV REDIS_URL=${REDIS_URL}
 
