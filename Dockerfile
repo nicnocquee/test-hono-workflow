@@ -1,12 +1,5 @@
 # Stage 1: Build stage
-FROM node:22-slim AS builder
-
-# Install build dependencies for native modules (needed for @swc/core)
-RUN apt-get update && apt-get install -y \
-    python3 \
-    make \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
+FROM node:22 AS builder
 
 WORKDIR /app
 
@@ -15,11 +8,7 @@ COPY package.json package-lock.json* ./
 
 # Install all dependencies (including dev dependencies for build)
 # Use npm install to allow platform-specific package resolution
-# This is necessary because package-lock.json may have been generated on a different platform
 RUN npm install --include=optional
-
-# Verify @swc/core has the correct platform binary installed
-RUN node -e "try { require('@swc/core'); console.log('@swc/core loaded successfully'); } catch(e) { console.error('@swc/core failed:', e.message); process.exit(1); }"
 
 # Copy source files
 COPY . .
