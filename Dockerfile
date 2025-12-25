@@ -28,13 +28,14 @@ WORKDIR /app
 
 # Copy the built output from builder stage
 COPY --from=builder /app/.output ./
-COPY --from=builder /app/node_modules/.nitro ./node_modules/.nitro
 
 # Navigate to server directory and install production dependencies
 WORKDIR /app/server
 
 # Install production dependencies from Nitro's generated package.json
 RUN npm ci --omit=dev --ignore-scripts || true
+
+COPY --from=builder /app/node_modules/.nitro ./node_modules/.nitro
 
 # Expose the port (adjust if your app uses a different port)
 EXPOSE 3000
